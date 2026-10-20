@@ -1,0 +1,4 @@
+name,n_atoms,n_dipole_pairs,Q,sum_pred_q,file
+ZINC00001795,13,26,-1,-1.000000238418579,pred_global_direct/ZINC00001795.txt
+ZINC00002215,13,26,0,0.0,pred_global_direct/ZINC00002215.txt
+ZINC00006364,16,32,0,-2.384185791015625e-07,pred_global_direct/ZINC00006364.txt

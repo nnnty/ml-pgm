@@ -1,0 +1,4 @@
+# name          stage-1 input           stage-2 input           sdf (geometry + bonds)
+ZINC00001795    inputs/ZINC00001795.in1 inputs/ZINC00001795.in2 inputs/ZINC00001795.sdf
+ZINC00002215    inputs/ZINC00002215.in1 inputs/ZINC00002215.in2 inputs/ZINC00002215.sdf
+ZINC00006364    inputs/ZINC00006364.in1 inputs/ZINC00006364.in2 inputs/ZINC00006364.sdf

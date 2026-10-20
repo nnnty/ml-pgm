@@ -20,7 +20,7 @@ model/*.py                             the four architectures
 scripts/train_*.py                     trainers, one per architecture
 scripts/predict_*.py                   script for running predictions on h5 files
 train/train_<model>.sh                 model training scripts
-train/out/<model>/{best.pt,config.json,train_loss.txt} model weight and config
+train/out/<model>/{best.pt,config.json} model weight and config
 predict/<model>/predict.sh             front-end for running the predictions on the standardized test split
 predict_pgm.py                         stand-alone prediction script for new molecules (pGM fit inputs + SDF)
 example/                               three molecules and a list file for predict_pgm.py
@@ -28,10 +28,13 @@ example/                               three molecules and a list file for predi
 
 ## Environment
 
-Python >= 3.10 with `torch`, `e3nn`, `h5py`, `numpy`, `scipy`, `rdkit`, `tqdm` (models were developed with torch 2.12 / e3nn 0.6).
+Python >= 3.10 with `torch`, `e3nn`, `h5py`, `numpy`, `scipy`, `rdkit`, `tqdm` (models were developed with torch 2.10 / e3nn 0.6.0).
 
 
 ## Predict pGM parameters for molecules: `predict_pgm.py`
+Before running the model, you need to download the model weights and configuration files from `<URL>`. 
+If you wish to use our dataset, please also download the corresponding `.h5` files. 
+Then, following the project structure shown above, place the appropriate `{train,val,test}.h5` and `{best.pt,config.json}` files in their respective directories.
 
 ```
 # Option 1: run prediction by explicitly giving required input files
@@ -47,7 +50,7 @@ python predict_pgm.py --model global_direct --list mols.txt --batch_size 16 --ou
   the two-stage pGM fit; both are always required. Only the first molecule
   block of each is read. They supply the elements, the net charge, the
   number of permanent dipoles per atom and the equivalence (ivary) columns.
-* `--sdf` gives the geometry (Angstrom) and the bond records (required). The molecule must have the same atom order as in PyRESP / PCMRESP inputs.
+* `--sdf` gives the geometry (**Angstrom**) and the bond records (**required**). The molecule **must** have the same atom order as in PyRESP / PCMRESP inputs.
 * The L2G-Equiv model always applies the equivalence constraints. The atom
   and dipole-pair classes are read from the ivary columns of the two inputs.
   The equivalence relations from both files will be merged using set union.
@@ -71,5 +74,5 @@ cd predict/l2g_equiv_delta && bash predict.sh        # Output: per_mol/<mol>.txt
 ## Retrain
 
 ```
-cd train && bash train_l2g_equiv_delta.sh
+cd train && bash train_l2g_equiv_delta.sh    # You may need to change some settings based on the hardware of your machine.
 ```
